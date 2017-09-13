@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>WebChat</title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" th:href="@{/assets/bootstrap/css/bootstrap.min.css}" href="../../assets/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" th:href="@{/assets/css/chat.css}" href="../../assets/css/chat.css" />
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+    <body>
+    
+		<div class="main_section">
+			<div class="container">
+				<div class="chat_container">
+					<div class="col-sm-3 chat_sidebar">
+						<div class="row">
+							<div id="custom-search-input">
+								<h4>Chat Room <a href="#chatRoomNewModal" class="pull-right" data-toggle="modal" data-target="#chatRoomNewModal"><span class="glyphicon glyphicon-plus"></span></a></h4>
+							</div>
+							
+							<div id="chatroom_list_div" class="member_list">
+								<ul id="chatroom_list_ul" class="list-unstyled">
+									<li class="left clearfix" th:each="chatRoom: ${chatRooms}" th:attr="data-id=${chatRoom.id}">
+										<strong class="primary-font" th:text="${chatRoom.name}" th:id="'chatroom-name-'+${chatRoom.id}"></strong> 
+										<strong class="pull-right badge" th:id="'chatroom-count-'+${chatRoom.id}"></strong>
+									</li>
+								</ul>
+							</div>
+							
+						</div>
+					</div>
+					
+					<!--chat_sidebar-->
+					<div class="col-sm-9 message_section hidden">
+						<div class="row">
+							<div class="new_message_head">
+								<div class="pull-right"><button>Exit Room</button></div>
+							</div>
+							<!--new_message_head-->
+							<div id="message_list_div" class="chat_area">
+								<ul id="message_list_ul" class="list-unstyled">
+								</ul>
+							</div>
+							
+							<!--chat_area-->
+							<div class="message_write">
+								<textarea id="newMessage" class="form-control" placeholder="type a message"></textarea>
+								<button id="sendNewMessage" class="pull-right btn btn-success">Send</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--message_section-->
+			</div>
+		</div>
+
+	<div class="modal fade" id="chatRoomNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">New Chat Room</h4>
+				</div>
+				<div class="modal-body">
+					<input id="newChatRoomName" type="text" class="form-control" placeholder="Chat room name..." required="required" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary" id="sendNewChatRoom">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script th:src="@{/assets/js/jquery.scrollTo.min.js}" src="../../assets/js/jquery.scrollTo.min.js"></script>
+	<script th:src="@{/assets/bootstrap/js/bootstrap.min.js}" src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+	<script th:src="@{/assets/js/stomp.js}" src="../../assets/js/stomp.js"></script>
+	<script th:src="@{/assets/js/bootstrapAlert.min.js}" src="../../assets/js/bootstrapAlert.min.js"></script>
+	<script type="text/javascript" th:inline="javascript" >
+    	var AJAX_URL_API = [[@{/api}]];
+	</script>
+	<script th:src="@{/assets/js/chat.js}" src="../../assets/js/chat.js"></script>
+	</body>
+</html>
