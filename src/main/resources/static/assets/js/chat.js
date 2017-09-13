@@ -34,14 +34,17 @@ function connect() {
 		});
 		connected = true;
 	}, function(error) {
+		console.log("Error: " + error);
 		connected = false;
-		BootstrapAlert.alert({
-			  title: "STOMP error",
-			  message: error,
-			  dissmissible: true,
-			  autoHide: false,
-			  hideTimeout: 1000
-			});
+		connect();
+		console.log("Connected: " + connected);
+//		BootstrapAlert.alert({
+//			  title: "STOMP error",
+//			  message: error,
+//			  dissmissible: true,
+//			  autoHide: false,
+//			  hideTimeout: 1000
+//			});
 	});
 }
 
@@ -56,7 +59,9 @@ function sendNewChatRoom() {
 	if (!val) return;
 	$("#newChatRoomName").val("")
 	if (!connected) {
+		console.log("Connected False: " + connected);
 		connect();
+		console.log("Reconnect: " + connected);
 	}
 	var data = JSON.stringify({
 		'content' : val
