@@ -3,7 +3,7 @@ var selRoomId;
 var connected = false;
 
 function connect() {
-	var socket = new WebSocket('ws://' + window.location.host + '/chatEndpoint');
+	var socket = new WebSocket('wss://' + window.location.host + '/chatEndpoint');
 	ws = Stomp.over(socket);
 
 	ws.connect({}, function(frame) {
@@ -15,7 +15,7 @@ function connect() {
 				  autoHide: true,
 				  hideTimeout: 3000
 				});
-		});
+		});		
 
 		ws.subscribe("/topic/chatroom", function(message) {
 			addChatRoom(JSON.parse(message.body));
