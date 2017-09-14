@@ -75,7 +75,7 @@
 						
 						<!--chat_area-->
 						<div class="message_write">
-							<textarea id="newMessage" class="form-control" placeholder="type a message"></textarea>
+							<textarea id="newMessage" maxlength="255" class="form-control" placeholder="type a message"></textarea>
 							<button id="sendNewMessage" class="pull-right btn btn-success">Send</button>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 					<h4 class="modal-title" id="myModalLabel">New Chat Room</h4>
 				</div>
 				<div class="modal-body">
-					<input id="newChatRoomName" type="text" class="form-control" placeholder="Chat room name..." required="required" />
+					<input id="newChatRoomName" type="text" maxlength="42" class="form-control" placeholder="Chat room name..." required="required" />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
