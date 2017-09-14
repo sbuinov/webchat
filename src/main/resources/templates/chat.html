@@ -18,52 +18,73 @@
 		<![endif]-->
 	</head>
     <body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" th:href="@{/}">WebChat</a>
+		  <div id="loading" class="pull-right container-fluid loading" ></div>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdows">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<span class="glyphicon glyphicon-user"></span>&nbsp;<b th:inline="text">[[${#httpServletRequest.remoteUser}]]</b>&nbsp;<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a th:href="@{/logout}">Logout</a></li>
+					</ul>
+				</li>
+			</ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
     
-		<div class="main_section">
-			<div class="container">
-				<div class="chat_container">
-					<div class="col-sm-3 chat_sidebar">
-						<div class="row">
-							<div id="custom-search-input">
-								<h4>Chat Room <a href="#chatRoomNewModal" class="pull-right" data-toggle="modal" data-target="#chatRoomNewModal"><span class="glyphicon glyphicon-plus"></span></a></h4>
-							</div>
-							
-							<div id="chatroom_list_div" class="member_list">
-								<ul id="chatroom_list_ul" class="list-unstyled">
-									<li class="left clearfix" th:each="chatRoom: ${chatRooms}" th:attr="data-id=${chatRoom.id}">
-										<strong class="primary-font" th:text="${chatRoom.name}" th:id="'chatroom-name-'+${chatRoom.id}"></strong> 
-										<strong class="pull-right badge" th:id="'chatroom-count-'+${chatRoom.id}"></strong>
-									</li>
-								</ul>
-							</div>
-							
+	<div class="main_section">
+		<div class="container">
+			<div class="chat_container">
+				<div class="col-sm-3 chat_sidebar">
+					<div class="row">
+						<div id="custom-search-input">
+							<h4>Chat Room <a href="#chatRoomNewModal" class="pull-right" data-toggle="modal" data-target="#chatRoomNewModal"><span class="glyphicon glyphicon-plus"></span></a></h4>
 						</div>
-					</div>
-					
-					<!--chat_sidebar-->
-					<div class="col-sm-9 message_section hidden">
-						<div class="row">
-							<div class="new_message_head">
-								<div class="pull-right"><button>Exit Room</button></div>
-							</div>
-							<!--new_message_head-->
-							<div id="message_list_div" class="chat_area">
-								<ul id="message_list_ul" class="list-unstyled">
-								</ul>
-							</div>
-							
-							<!--chat_area-->
-							<div class="message_write">
-								<textarea id="newMessage" class="form-control" placeholder="type a message"></textarea>
-								<button id="sendNewMessage" class="pull-right btn btn-success">Send</button>
-							</div>
+						
+						<div id="chatroom_list_div" class="member_list">
+							<ul id="chatroom_list_ul" class="list-unstyled">
+								<li class="left clearfix" th:each="chatRoom: ${chatRooms}" th:attr="data-id=${chatRoom.id}">
+									<strong class="primary-font" th:text="${chatRoom.name}" th:id="'chatroom-name-'+${chatRoom.id}"></strong> 
+									<strong class="pull-right badge" th:id="'chatroom-count-'+${chatRoom.id}"></strong>
+								</li>
+							</ul>
 						</div>
+						
 					</div>
 				</div>
 				
-				<!--message_section-->
+				<!--chat_sidebar-->
+				<div class="col-sm-9 message_section hidden">
+					<div class="row">
+						<div class="new_message_head">
+							<div class="pull-left" id="roomname"></div>
+						</div>
+						<!--new_message_head-->
+						<div id="message_list_div" class="chat_area">
+							<ul id="message_list_ul" class="list-unstyled">
+							</ul>
+						</div>
+						
+						<!--chat_area-->
+						<div class="message_write">
+							<textarea id="newMessage" class="form-control" placeholder="type a message"></textarea>
+							<button id="sendNewMessage" class="pull-right btn btn-success">Send</button>
+						</div>
+					</div>
+				</div>
 			</div>
+			
+			<!--message_section-->
 		</div>
+	</div>
 
 	<div class="modal fade" id="chatRoomNewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -91,6 +112,7 @@
 	<script th:src="@{/assets/js/stomp.js}" src="../../assets/js/stomp.js"></script>
 	<script th:src="@{/assets/js/bootstrapAlert.min.js}" src="../../assets/js/bootstrapAlert.min.js"></script>
 	<script type="text/javascript" th:inline="javascript" >
+		var MAIN_URL = [[@{/}]];
     	var AJAX_URL_API = [[@{/api}]];
 	</script>
 	<script th:src="@{/assets/js/chat.js}" src="../../assets/js/chat.js"></script>

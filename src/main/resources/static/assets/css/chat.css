@@ -1,3 +1,13 @@
+ body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+.loading {
+	background: url(../img/ajax-loader.gif) no-repeat center;
+	padding: 20px 20px;
+}
+
  #custom-search-input {
   background: #e8e6e7 none repeat scroll 0 0;
   margin: 0;
@@ -76,9 +86,6 @@
    margin-left: 47px;
    margin-top: 0;
    }
-   .top_nav {
-   overflow: visible;
-   }
    .member_list .contact_sec {
    margin-top: 3px;
    }
@@ -132,7 +139,7 @@
 .new_message_head {
   background: #f5f3f3 none repeat scroll 0 0;
   float: left;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
   padding: 18px 10px;
   width: 100%;

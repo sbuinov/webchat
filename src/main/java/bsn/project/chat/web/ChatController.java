@@ -16,7 +16,7 @@ public class ChatController {
     @Autowired
     private ChatRoomRepository chatRoomRepository;
     
-    @RequestMapping(value ="/chat", method = RequestMethod.GET)
+    @RequestMapping(value ="/", method = RequestMethod.GET)
     public ModelAndView show() {
         Iterable<ChatRoom> chatRooms = chatRoomRepository.findAll();
         ModelAndView modelAndView = new ModelAndView("chat");
